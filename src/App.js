@@ -1,29 +1,18 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import './App.css';
 
-import Child from './component/Child'
+import { useSelector, useDispatch} from 'react-redux'
+
 
 function App() {
-  const  [i, setI] = useState( 0 )
 
-  function handleClick (){
-    setI(i + 1);
-  }
-
-  const memoChild = useMemo(()=>{
-   return <Child></Child> 
-  }, [i])
-
+  const dispatch = useDispatch();
+  const counter = useSelector( (state) => state.counter)
   return (
     <div className="App">
       <header className="App-header">
-        <h3>React Memo</h3>
-        <h2>Intial: {i}</h2>
-        <button onClick={handleClick}>adding State</button>
-        <h3>Child Render</h3>
-        <Child></Child>
-        <h3>Memo Render</h3>
-          {memoChild}
+        <h1>counter : { counter }</h1>
+        <button onClick = {(() => dispatch({type:'INCREMENT'}))}>INCREMENT</button>
       </header>
     </div>
   );
