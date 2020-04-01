@@ -4,8 +4,8 @@ import testReducer from './testRenducer';
 
 const rootReducer = combineReducers({
   
-    globalapiReducer,
-    testReducer
+    user: globalapiReducer,
+    test: testReducer
    
 });
 

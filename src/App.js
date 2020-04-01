@@ -1,18 +1,14 @@
 import React from 'react';
 import './App.css';
 
-import { useSelector, useDispatch} from 'react-redux'
+import Counter from './common/component/counter/counter'
 
 
-function App() {
-
-  const dispatch = useDispatch();
-  const counter = useSelector( (state) => state.counter)
+function App() { 
   return (
     <div className="App">
       <header className="App-header">
-        <h1>counter : { counter }</h1>
-        <button onClick = {(() => dispatch({type:'INCREMENT'}))}>INCREMENT</button>
+        <Counter/>
       </header>
     </div>
   );

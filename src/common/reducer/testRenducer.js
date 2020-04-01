@@ -10,7 +10,7 @@ const testReducer = (state = initialState, action) => {
         case 'DECREMENT':
             return { counter: state.counter - 1};
         default:
-            return { state };
+            return { ...state }
     }
 };
 
