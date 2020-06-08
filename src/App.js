@@ -1,15 +1,15 @@
 import React from 'react';
 import './App.css';
+import ListContaniner from './common/container/listContanier';
 
-import Counter from './common/component/counter/counter'
 
 
-function App() { 
+const App=() => { 
   return (
     <div className="App">
-      <header className="App-header">
-        <Counter/>
-      </header>
+      
+        <ListContaniner/>
+      
     </div>
   );
 }
