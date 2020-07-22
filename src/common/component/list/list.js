@@ -1,43 +1,23 @@
 import React, { useState } from 'react';
-import TodoForm from '../todoListForm/todoForm'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import IconButton from '@material-ui/core/IconButton';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import { Divider } from '@material-ui/core';
 
-const ToDoList = () => {
-
-    const TodoList = [
-        {
-            id: 1,
-            name: "vikku"
-        },
-        {
-            id: 2,
-            name: "sri"
-        },
-        {
-            id: 3,
-            name: "arya"
-        }
-    ]
-    const [newTodoList, setNewTodoList] = useState(TodoList)
-
-    const removeTodo = (id) => {
-        setNewTodoList(newTodoList.filter(todo => todo.id !== id))
-    }
-
+const ToDoList = (props) => {
+    const {todos, removeTodo, editTodo} =props
     return (
       <div className="todo-list">
         <List >
-                {newTodoList.map(todo => {
+                {todos.map(todo => {
                     return (
                         <ListItem>
                             <ListItemText
-                                primary={todo.name}
-
+                                primary={todo.name}  
                             />
                             <ListItemSecondaryAction>
                                 <IconButton edge="end" aria-label="delete">
@@ -45,15 +25,21 @@ const ToDoList = () => {
                                         onClick={() => { removeTodo(todo.id) }}
                                     />
                                 </IconButton>
+                                <IconButton edge="end" aria-label="delete">
+                                    <EditIcon
+                                        onClick={() => { editTodo(todo) }}
+                                    />
+                                </IconButton>
                             </ListItemSecondaryAction>
+                            <Divider/>
                         </ListItem>
-                        //<Divider />
+                        
                     )
                 }
-                    //<h3>{todo.name} <span onClick={() => { removeTodo(todo.id) }}>X</span> </h3>
+                    
                 )}
             </List>
-            <TodoForm setNewTodoList= {setNewTodoList} newTodoList={newTodoList} />
+            
       </div>
     );
   }

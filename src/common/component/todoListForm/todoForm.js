@@ -1,32 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import Input from '@material-ui/core/Input';
 import FormControl from '@material-ui/core/FormControl';
+import { useSelector } from 'react-redux';
 
 
 const TodoForm = (props) => {
-    const [value, setValue] = useState("");
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      props.setNewTodoList([...props.newTodoList, { id: Math.random(), name: value }])
-      setValue('');
+  const { addTodo } = props
+  const editTodo = useSelector(state => state.editTodo)
+  const { id, name } = editTodo
+  const [value, setValue] = useState("");
+  const inputRef = useRef("")
+  useEffect(() => {
+    setValue(name ? name : '')
+  }, [editTodo])
+
+  useEffect(() => {
+    inputRef.current.focus()
+    console.log(inputRef.current)
+  })
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addTodo({ id: id ? id : null, name: value })
+    setValue('');
   };
-  
-    return (
-      <form onSubmit={handleSubmit} style= {{margin:20}}>
+
+  return (
+    <form onSubmit={handleSubmit} style={{ margin: 20 }}>
       <FormControl fullWidth >
 
-          <Input
-              id="standard-adornment-amount"
-              required
-              placeholder="add new todo"
-              value={value}
-              onChange={e => setValue(e.target.value)}
-              fullWidth
-          />
+        <Input
+          ref = {inputRef}
+          id="standard-adornment-amount"
+          required
+          placeholder="add new todo"
+          value={value}
+          onChange={e => setValue(e.target.value)}
+          fullWidth
+        />
       </FormControl>
-  </form>
-    );
-  }
+    </form>
+  );
+}
 
 export default TodoForm;
